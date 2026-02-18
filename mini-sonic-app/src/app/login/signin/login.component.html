@@ -1,0 +1,96 @@
+<div class="login-container">
+  <div class="avatar-container">
+    <div class="avatar"></div>
+  </div>
+
+  <mat-card class="login-card">
+    <mat-card-content>
+      <!-- Header -->
+      <div class="header">
+        <h1>Sign In</h1>
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+        <!-- Email Field -->
+        <div class="form-field-wrapper">
+          <label class="field-label">Your Email</label>
+          <mat-form-field class="custom-form-field" appearance="outline">
+            <input formControlName="email" matInput type="email" />
+            <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+              Email is required
+            </mat-error>
+            <mat-error
+              *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
+              Please enter a valid email format
+            </mat-error>
+            <mat-error
+              *ngIf="loginForm.controls['email'].hasError('invalidEmailFormat') && !loginForm.controls['email'].hasError('required') && !loginForm.controls['email'].hasError('email')">
+              Email must have a valid domain (e.g., .com, .net, .org)
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-field-wrapper">
+          <div class="password-label-row">
+            <label class="field-label">Your password</label>
+            <button type="button" class="show-hide-btn" (click)="hide = !hide" tabindex="-1">
+              {{ hide ? 'Show' : 'Hide' }}
+            </button>
+          </div>
+          <mat-form-field class="custom-form-field" appearance="outline">
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
+            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+              Password is required
+            </mat-error>
+            <mat-error
+              *ngIf="loginForm.controls['password'].hasError('minlength') && !loginForm.controls['password'].hasError('required')">
+              Password must be at least 8 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" mat-flat-button class="login-btn">
+          Log In
+        </button>
+        @if (statusMessage){
+        <div class="bottom-links">
+          <p> {{statusMessage}}
+            @if(statusMessage ===`User doesn't exist. `) {
+              <a  class="link"
+              routerLink="signup"> Create An Account </a>.
+            }
+          @else if(statusMessage ===`Password is incorrect.`) {Did you <a routerLink="/auth/forgot-password" class="link">forget your
+              password</a> 
+          }
+          </p>
+        </div>
+      }
+      </form>
+
+      <!-- Terms Text -->
+      <p class="terms-text">
+        By continuing, you agree to the <a href="#">Terms of use</a> and <a href="#">Privacy Policy</a>.
+      </p>
+
+      <!-- Bottom Links -->
+      <div class="bottom-links">
+        <a routerLink="/auth/forgot-password" class="link">Forgot your password</a>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider">
+        <span>New to our community</span>
+      </div>
+
+      <!-- Create Account Button -->
+      <button type="button" mat-stroked-button class="create-account-btn" (click)="onCreateNewAccount()">
+        Create an account
+      </button>
+
+    </mat-card-content>
+  </mat-card>
+</div>

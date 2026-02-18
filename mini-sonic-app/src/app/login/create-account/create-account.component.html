@@ -1,0 +1,119 @@
+<div class="signup-container">
+    <!-- Avatar OUTSIDE the card, centered at top -->
+    <div class="avatar-container">
+        <div class="avatar"></div>
+    </div>
+
+    <mat-card class="signup-card">
+        <mat-card-content>
+            <!-- Header -->
+            <div class="header">
+                <h1>Create A New Account</h1>
+            </div>
+
+            <!-- Signup Form -->
+            <form [formGroup]="signupForm" (ngSubmit)="onRegister()">
+
+                <!-- Username Field -->
+                <div class="form-field-wrapper">
+                    <label class="field-label">Username</label>
+                    <mat-form-field class="custom-form-field" appearance="outline">
+                        <input formControlName="username" matInput type="text" />
+                        <mat-error *ngIf="signupForm.controls['username'].hasError('required')">
+                            Username is required
+                        </mat-error>
+                        <mat-error
+                            *ngIf="signupForm.controls['username'].hasError('maxlength') && !signupForm.controls['username'].hasError('required')">
+                            Username cannot exceed 250 characters
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-field-wrapper">
+                    <label class="field-label">Email</label>
+                    <mat-form-field class="custom-form-field" appearance="outline">
+                        <input formControlName="email" matInput type="email" />
+                        <mat-error *ngIf="signupForm.controls['email'].hasError('required')">
+                            Email is required
+                        </mat-error>
+                        <mat-error
+                            *ngIf="signupForm.controls['email'].hasError('email') && !signupForm.controls['email'].hasError('required')">
+                            Please enter a valid email
+                        </mat-error>
+                        <mat-error
+                            *ngIf="signupForm.controls['email'].hasError('invalidEmailFormat') && !signupForm.controls['email'].hasError('required') && !signupForm.controls['email'].hasError('email')">
+                            Email must have a valid domain (e.g., .com, .net, .org)
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-field-wrapper">
+                    <div class="password-label-row">
+                        <label class="field-label">Password</label>
+                        <button type="button" class="show-hide-btn" (click)="hidePassword = !hidePassword"
+                            tabindex="-1">
+                            {{ hidePassword ? 'Show' : 'Hide' }}
+                        </button>
+                    </div>
+                    <mat-form-field class="custom-form-field" appearance="outline">
+                        <input formControlName="newPassword" matInput [type]="hidePassword ? 'password' : 'text'" />
+                        <mat-error *ngIf="signupForm.controls['newPassword'].hasError('required')">
+                            Password is required
+                        </mat-error>
+                        <mat-error
+                            *ngIf="signupForm.controls['newPassword'].hasError('minlength') && !signupForm.controls['newPassword'].hasError('required')">
+                            Password must be at least 8 characters
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="form-field-wrapper">
+                    <div class="password-label-row">
+                        <label class="field-label">Confirm password</label>
+                        <button type="button" class="show-hide-btn"
+                            (click)="hideConfirmedPassword = !hideConfirmedPassword" tabindex="-1">
+                            {{ hideConfirmedPassword ? 'Show' : 'Hide' }}
+                        </button>
+                    </div>
+                    <mat-form-field class="custom-form-field" appearance="outline">
+                        <input formControlName="confirmPassword" matInput
+                            [type]="hideConfirmedPassword ? 'password' : 'text'" />
+                        <mat-error *ngIf="signupForm.controls['confirmPassword'].hasError('required')">
+                            Confirm password is required
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- Password mismatch error -->
+                    <div class="password-mismatch-error"
+                        *ngIf="signupForm.hasError('fieldsMismatch') && signupForm.controls['confirmPassword'].touched && !signupForm.controls['confirmPassword'].hasError('required')">
+                        Passwords do not match
+                    </div>
+                </div>
+
+                <!-- Create Account Button -->
+                <button type="submit" mat-flat-button class="signup-btn">
+                    Create account
+                </button>
+                <div *ngIf="statusMessage">
+                  <p> {{statusMessage}} go to <a routerLink="/login"> login</a>.</p> 
+                </div>
+            </form>
+
+            <!-- Already have account text -->
+            <p class="already-account-text">
+                Already have an account?
+            </p>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Sign In Button -->
+            <button type="button" mat-stroked-button class="signin-btn" routerLink="/login">
+                Sign in
+            </button>
+
+        </mat-card-content>
+    </mat-card>
+</div>

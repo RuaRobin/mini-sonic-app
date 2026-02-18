@@ -1,0 +1,423 @@
+/* Container for centering */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: -32px;  
+  z-index: 10;  
+  position: relative;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-image: url('/assets/user.png');  
+  background-size: cover;      
+  background-color:#DCDCDC;
+  background-position: center; 
+  background-repeat: no-repeat;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Card styling */
+.login-card {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  background: white !important;
+  padding-top: 32px; 
+}
+
+.login-card ::ng-deep .mat-mdc-card-content {
+  padding: 20px 32px !important;
+  padding-top: 48px !important;  
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: -10px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 400;
+  color: #1c1e21;
+  margin: 0;
+}
+
+/* Form field wrapper */
+.form-field-wrapper {
+  margin-bottom: 20px;
+}
+
+/* Static label above the field */
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #4b5563;
+  margin-bottom: 6px;
+font-family: 'Montserrat', sans-serif;
+}
+
+/* Password label row */
+.password-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.password-label-row .field-label {
+  margin-bottom: 0;
+}
+
+/* Show/Hide button */
+.show-hide-btn {
+  all: unset;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 400;
+ font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.show-hide-btn:hover {
+  color: #C0C0C0;
+  background-color: #f3f4f6;
+}
+
+.show-hide-btn:active {
+  background-color: #e5e7eb;
+}
+
+.show-hide-btn:focus {
+  outline: none;
+}
+
+/* ============================================
+   MATERIAL FORM FIELD CUSTOMIZATION
+   ============================================ */
+
+.custom-form-field {
+  width: 100%;
+  display: block;
+}
+
+/* HIDE Material's floating label completely */
+.custom-form-field ::ng-deep .mat-mdc-floating-label,
+.custom-form-field ::ng-deep .mdc-floating-label {
+  display: none !important;
+}
+
+/* Remove the notch */
+.custom-form-field ::ng-deep .mdc-notched-outline__notch {
+  border: none !important;
+  width: 0 !important;
+  padding: 0 !important;
+}
+
+/* Style the border */
+.custom-form-field ::ng-deep .mdc-notched-outline__leading {
+  border: 1px solid #d1d5db !important;
+  border-right: none !important;
+  border-radius: 8px 0 0 8px !important;
+  width: 12px !important;
+}
+
+.custom-form-field ::ng-deep .mdc-notched-outline__trailing {
+  border: 1px solid #d1d5db !important;
+  border-left: none !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+/* Hover state */
+.custom-form-field ::ng-deep .mdc-text-field:hover .mdc-notched-outline__leading,
+.custom-form-field ::ng-deep .mdc-text-field:hover .mdc-notched-outline__trailing {
+  border-color: #9ca3af !important;
+}
+
+/* Focus state */
+.custom-form-field ::ng-deep .mdc-text-field--focused .mdc-notched-outline__leading,
+.custom-form-field ::ng-deep .mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #6366f1 !important;
+  border-width: 1px !important;
+}
+
+.custom-form-field ::ng-deep .mdc-text-field--focused .mdc-notched-outline__leading {
+  border-right: none !important;
+}
+
+.custom-form-field ::ng-deep .mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-left: none !important;
+}
+
+/* Add subtle shadow on focus */
+.custom-form-field ::ng-deep .mdc-text-field--focused {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-radius: 8px;
+}
+
+/* Remove Material's padding/background */
+.custom-form-field ::ng-deep .mat-mdc-text-field-wrapper {
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+.custom-form-field ::ng-deep .mat-mdc-form-field-flex {
+  padding: 0 !important;
+  align-items: center !important;
+}
+
+.custom-form-field ::ng-deep .mat-mdc-form-field-infix {
+  padding: 0 !important;
+  border: none !important;
+  min-height: auto !important;
+}
+
+/* Input styling */
+.custom-form-field ::ng-deep .mat-mdc-input-element {
+  padding: 12px 14px !important;
+  font-size: 15px !important;
+  color: #1c1e21 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  height: auto !important;
+  line-height: 1.5 !important;
+}
+
+
+
+/* Hide password reveal button in Edge/IE */
+.custom-form-field ::ng-deep input[type="password"]::-ms-reveal,
+.custom-form-field ::ng-deep input[type="password"]::-ms-clear {
+  display: none !important;
+}
+
+/* Hide password reveal button in Chrome/Safari/Edge Chromium */
+.custom-form-field ::ng-deep input[type="password"]::-webkit-textfield-decoration-container,
+.custom-form-field ::ng-deep input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden !important;
+}
+/* Chrome, Safari, Edge - Remove yellow/blue autofill background */
+.custom-form-field ::ng-deep input:-webkit-autofill,
+.custom-form-field ::ng-deep input:-webkit-autofill:hover,
+.custom-form-field ::ng-deep input:-webkit-autofill:focus,
+.custom-form-field ::ng-deep input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;  /* White background */
+  -webkit-text-fill-color: #1c1e21 !important;  /* Text color to match */
+  transition: background-color 5000s ease-in-out 0s;  /* Prevents flash */
+}
+
+/* Firefox - Remove autofill styling */
+.custom-form-field ::ng-deep input:-moz-autofill,
+.custom-form-field ::ng-deep input:-moz-autofill-preview {
+  background-color: white !important;
+  color: #1c1e21 !important;
+  filter: none !important;
+}
+/* Additional browser password controls */
+.custom-form-field ::ng-deep input[type="text"]::-ms-reveal,
+.custom-form-field ::ng-deep input[type="text"]::-ms-clear {
+  display: none !important;
+}
+
+/* Error state - red border */
+.custom-form-field ::ng-deep .mdc-text-field--invalid .mdc-notched-outline__leading,
+.custom-form-field ::ng-deep .mdc-text-field--invalid .mdc-notched-outline__trailing {
+  border-color: #ef4444 !important;
+}
+
+
+
+/* Keep subscript wrapper in normal document flow */
+.custom-form-field ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  position: relative !important;
+  display: block !important;
+  padding: 0 !important;
+  margin-top: -15px !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Bottom align should also be in normal flow */
+.custom-form-field ::ng-deep .mat-mdc-form-field-bottom-align {
+  position: relative !important;
+  display: block !important;
+  height: auto !important;
+}
+
+/* Error wrapper in normal flow */
+.custom-form-field ::ng-deep .mat-mdc-form-field-error-wrapper {
+  position: relative !important;
+  display: block !important;
+  padding: 0 !important;
+}
+
+/* Style mat-error */
+.custom-form-field ::ng-deep mat-error {
+  display: block !important;
+  position: relative !important;
+  color: #ef4444 !important;
+  font-size: 12px !important;
+  font-family: 'Montserrat', sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Hide hints */
+.custom-form-field ::ng-deep .mat-mdc-form-field-hint-wrapper {
+  display: none !important;
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  height: 48px !important;
+  margin-top: 8px;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  background-color: #696969!important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.login-btn:hover:not(:disabled) {
+  background-color: #6b7280 !important;
+}
+
+.login-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.login-btn:disabled {
+  opacity: 0.6 !important;
+}
+
+/* Terms text */
+.terms-text {
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+  margin: 16px 0 20px;
+  line-height: 1.5;
+}
+
+.terms-text a {
+  color: #1c1e21;
+  text-decoration: underline;
+}
+
+.terms-text a:hover {
+  color: #4b5563;
+}
+
+/* Bottom links */
+.bottom-links {
+  display: flex;
+  margin-bottom: 24px;
+  gap: 16px;
+  justify-content: center;
+
+}
+
+.bottom-links .link {
+  font-size: 13px;
+  color: #1c1e21;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.bottom-links .link:hover {
+  color: #4b5563;
+}
+
+/* Divider with text */
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 24px 0;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #e5e7eb;
+}
+
+.divider span {
+  position: relative;
+  display: inline-block;
+  padding: 0 16px;
+  background-color: white;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Create Account Button */
+.create-account-btn {
+  width: 100%;
+  height: 44px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #1c1e21 !important;
+  background-color: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.create-account-btn:hover {
+  background-color: #f9fafb !important;
+  border-color: #9ca3af !important;
+}
+
+.create-account-btn:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card ::ng-deep .mat-mdc-card-content {
+    padding: 32px 24px !important;
+    padding-top: 40px !important;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .bottom-links {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+}
