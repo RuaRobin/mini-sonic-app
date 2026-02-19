@@ -15,9 +15,15 @@ export class LoginService {
     const users = localStorage.getItem('users');
 
     if (users) {
-      this.users = JSON.parse(users);
-          this.nextID = Math.max(...this.users.map(u => u.id)) + 1;
+          this.users = JSON.parse(users);
+        } else {
+          this.users = USERS;
+          this.saveUsers();
         }
+          this.nextID = this.users.length > 0
+      ? Math.max(...this.users.map(u => u.id)) + 1
+      : 0;
+
   }
   checkIfExists(user: User): boolean {
     return !!this.users.find(

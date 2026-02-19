@@ -1,4 +1,9 @@
-<p>dashboard works!</p>
-@if (user){
-    <p> Hello {{user.name}} </p>
-}
+<div class="dashboard-layout">
+    <!-- <app-sidebar></app-sidebar> -->
+    <div class="dashboard-main">
+        <app-header></app-header>
+        <div class="dashboard-content">
+            <app-operations-table></app-operations-table>
+        </div>
+    </div>
+</div>

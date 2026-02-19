@@ -15,30 +15,39 @@ import { LoginService } from "./login/login.service";
 import { ToastrModule } from "ngx-toastr";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { NotificationsService } from "./notification.service";
-
 import { JwtModule } from '@auth0/angular-jwt';
-
+import { HeaderComponent } from "./header/header.component";
+import { SidebarComponent } from "./dashboard/sidebar/sidebar.component";
+import { OperationsTableComponent } from "./dashboard/operations-table/operations-table.component";
+import { MatTable, MatColumnDef, MatHeaderCell, MatHeaderRowDef, MatCell, MatCellDef } from "@angular/material/table";
+import { MatSort, MatSortHeader } from "@angular/material/sort";
+import {MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTooltip } from "@angular/material/tooltip";
 export function tokenGetter() {
   return localStorage.getItem('jwt');
 }
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent,CreateAccountComponent,DashboardComponent],
+    declarations: [AppComponent, LoginComponent,CreateAccountComponent,DashboardComponent,HeaderComponent,SidebarComponent,OperationsTableComponent],
     imports: [AppRoutingModule, BrowserModule, BrowserAnimationsModule,
-        MatButtonModule, MatCardModule, MatInputModule,NgIf,MatIconModule,ReactiveFormsModule, 
-        ToastrModule.forRoot({
+    MatButtonModule, MatCardModule, MatInputModule, NgIf, MatIconModule, ReactiveFormsModule,
+    ToastrModule.forRoot({
         timeOut: 3000,
         positionClass: 'toast-top-right',
         preventDuplicates: true,
         closeButton: true
     }),
-        JwtModule.forRoot({
-          config: {
+    JwtModule.forRoot({
+        config: {
             tokenGetter: tokenGetter,
-            allowedDomains:[],
-            disallowedRoutes:[]
-          }  
-        })],
+            allowedDomains: [],
+            disallowedRoutes: []
+        }
+    }), MatTable, MatSort, MatColumnDef, MatHeaderCell, MatHeaderRowDef, MatSortHeader, MatCell, MatCellDef, MatTableModule,
+    MatPaginatorModule,
+    MatSortModule, MatTooltip],
     bootstrap: [AppComponent],
     providers:[LoginService,NotificationsService]
 })

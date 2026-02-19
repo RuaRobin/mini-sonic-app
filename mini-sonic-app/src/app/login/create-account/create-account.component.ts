@@ -48,7 +48,7 @@ export class CreateAccountComponent implements OnInit {
     }
     console.log('Registration form values:', form);
     const newUser= {
-      id: 0,
+      id: 1,
       name: form.username,
       email: form.email,
       password: form.newPassword

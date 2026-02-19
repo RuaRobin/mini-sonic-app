@@ -1,0 +1,35 @@
+<header class="app-header">
+    <div class="header-left">
+        <span class="page-title">{{pageTitle}}</span>
+    </div>
+    <div class="header-right">
+
+        <div class="user-profile" (click)="toggleDropdown()" [class.open]="dropdownOpen">
+            <div class="avatar">
+                {{getInitials()}}
+            </div>
+            <div class="user-info">
+                <span class="user-name"> {{user?.name || 'Guest'}}</span>
+                <span class="user-role">{{jwt.role}}</span>
+            </div>
+            <mat-icon class="cheveron">expand_more</mat-icon>
+            </div>
+            <div class="dropdown-menu" *ngIf="dropdownOpen">
+                <ul>
+                    <li>
+                        <mat-icon> person </mat-icon>
+                        <span>Profile</span>
+                    </li>
+                    <li>
+                        <mat-icon>settings</mat-icon>
+                        <span>Settings </span>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="logout" (click)="onLogout()">
+                        <mat-icon>logout</mat-icon>
+                        <span>Logout</span>
+                    </li>
+                </ul>
+        </div>
+        </div>
+</header>

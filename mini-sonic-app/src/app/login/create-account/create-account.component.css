@@ -1,12 +1,13 @@
 /* Container for centering */
 .signup-container {
-min-height: 100vh;
   display: flex;
   flex-direction: column; 
   align-items: center;
   justify-content: center;
   padding: 1px;
   position: relative;
+  background-color: #DCDCDC;
+
 }
 
 /* Avatar - positioned OUTSIDE card, centered at top */
@@ -33,7 +34,7 @@ min-height: 100vh;
 
 /* Card styling */
 .signup-card {
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
   border-radius: 12px !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
@@ -45,7 +46,7 @@ min-height: 100vh;
 }
 
 .signup-card ::ng-deep .mat-mdc-card-content {
-  padding: 32px 60px !important;
+  padding: 10px 70px !important;
   padding-top: 40px !important;
 }
 

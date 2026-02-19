@@ -1,6 +1,322 @@
+/* =============================================
+   GLOBAL THEME — matched to login.component.css
+   Colors: focus #6366f1, border #d1d5db, 
+           button #696969, error #ef4444
+   Font: Montserrat
+   ============================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
+* {
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  color: #1c1e21;
+}
+
+
+.mat-mdc-form-field {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Hide floating label globally (matches login) */
+.mat-mdc-floating-label,
+.mdc-floating-label {
+  display: none !important;
+}
+
+/* Remove notch */
+.mdc-notched-outline__notch {
+  border: none !important;
+  width: 0 !important;
+  padding: 0 !important;
+}
+
+/* Border — idle */
+.mdc-notched-outline__leading {
+  border: 1px solid #d1d5db !important;
+  border-right: none !important;
+  border-radius: 8px 0 0 8px !important;
+  width: 12px !important;
+}
+
+.mdc-notched-outline__trailing {
+  border: 1px solid #d1d5db !important;
+  border-left: none !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+/* Border — hover */
+.mdc-text-field:hover .mdc-notched-outline__leading,
+.mdc-text-field:hover .mdc-notched-outline__trailing {
+  border-color: #9ca3af !important;
+}
+
+/* Border — focused (indigo, matches login) */
+.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #6366f1 !important;
+  border-width: 1px !important;
+}
+
+.mdc-text-field--focused .mdc-notched-outline__leading {
+  border-right: none !important;
+}
+
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-left: none !important;
+}
+
+/* Focus shadow */
+.mdc-text-field--focused {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+  border-radius: 8px;
+}
+
+/* Remove Material padding/background */
+.mat-mdc-text-field-wrapper {
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+.mat-mdc-form-field-flex {
+  padding: 0 !important;
+  align-items: center !important;
+}
+
+.mat-mdc-form-field-infix {
+  padding: 0 !important;
+  border: none !important;
+  min-height: auto !important;
+}
+
+/* Input text */
+.mat-mdc-input-element {
+  padding: 12px 14px !important;
+  font-size: 15px !important;
+  color: #1c1e21 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  height: auto !important;
+  line-height: 1.5 !important;
+}
+
+/* Autofill override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #1c1e21 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Error border */
+.mdc-text-field--invalid .mdc-notched-outline__leading,
+.mdc-text-field--invalid .mdc-notched-outline__trailing {
+  border-color: #ef4444 !important;
+}
+
+/* Error message */
+mat-error,
+.mat-mdc-form-field-error {
+  display: block !important;
+  position: relative !important;
+  color: #ef4444 !important;
+  font-size: 12px !important;
+  font-family: 'Montserrat', sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Subscript wrapper */
+.mat-mdc-form-field-subscript-wrapper {
+  position: relative !important;
+  display: block !important;
+  padding: 0 !important;
+  margin-top: -15px !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.mat-mdc-form-field-bottom-align {
+  position: relative !important;
+  display: block !important;
+  height: auto !important;
+}
+
+.mat-mdc-form-field-error-wrapper {
+  position: relative !important;
+  display: block !important;
+  padding: 0 !important;
+}
+
+/* Hide hints */
+.mat-mdc-form-field-hint-wrapper {
+  display: none !important;
+}
+
+/* Suffix icon */
+.mat-mdc-form-field-icon-suffix mat-icon {
+  color: #9ca3af;
+  font-size: 18px;
+  padding-right: 10px;
+}
+
+/* =============================================
+   MAT BUTTON — flat (matches .login-btn)
+   ============================================= */
+
+button.mat-mdc-unelevated-button,
+button[mat-flat-button] {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  background-color: #696969 !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+button.mat-mdc-unelevated-button:hover:not(:disabled),
+button[mat-flat-button]:hover:not(:disabled) {
+  background-color: #6b7280 !important;
+}
+
+button.mat-mdc-unelevated-button:active:not(:disabled),
+button[mat-flat-button]:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button.mat-mdc-unelevated-button:disabled,
+button[mat-flat-button]:disabled {
+  opacity: 0.6 !important;
+}
+
+/* =============================================
+   MAT BUTTON — stroked (matches .create-account-btn)
+   ============================================= */
+
+button.mat-mdc-outlined-button,
+button[mat-stroked-button] {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #1c1e21 !important;
+  background-color: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+button.mat-mdc-outlined-button:hover,
+button[mat-stroked-button]:hover {
+  background-color: #f9fafb !important;
+  border-color: #9ca3af !important;
+}
+
+/* =============================================
+   MAT CARD — matches .login-card
+   ============================================= */
+
+.mat-mdc-card {
+  font-family: 'Montserrat', sans-serif !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  background: white !important;
+}
+
+/* =============================================
+   MAT TABLE
+   ============================================= */
+
+.mat-mdc-table {
+  font-family: 'Montserrat', sans-serif !important;
+  background: #ffffff !important;
+}
+
+.mat-mdc-header-cell {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #6b7280 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #fafafa !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.mat-mdc-cell {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 13px !important;
+  color: #1c1e21 !important;
+  border-bottom: 1px solid #f3f4f6 !important;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  background: #f9fafb !important;
+}
+
+/* Sort arrow */
+.mat-sort-header-arrow {
+  color: #6366f1 !important;
+}
+
+/* =============================================
+   MAT PAGINATOR
+   ============================================= */
+
+.mat-mdc-paginator {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 12px !important;
+  background: #ffffff !important;
+  border-top: 1px solid #e5e7eb;
+  color: #4b5563 !important;
+}
+
+.mat-mdc-paginator .mat-mdc-select-value,
+.mat-mdc-paginator .mat-mdc-paginator-range-label {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 12px !important;
+  color: #4b5563 !important;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button svg {
+  fill: #6366f1;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button[disabled] svg {
+  fill: #d1d5db;
+}
+
+/* =============================================
+   SCROLLBAR
+   ============================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
 }

@@ -1,0 +1,191 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Left */
+.page-title {
+  font-size: 22px;
+  font-weight: 500;
+  font-family: 'Montserrat';
+  color: #242424;
+  letter-spacing: 0.01em;
+}
+
+/* Right */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+/* Bell */
+.icon-btn {
+  position: relative;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #555;
+}
+
+.icon-btn:hover {
+  background: #ececec;
+}
+
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #e53935;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
+/* User profile */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.user-profile:hover {
+  background: #f5f5f5;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #242424;
+}
+
+.user-role {
+  font-size: 11px;
+  color: #888;
+}
+
+.chevron {
+  font-size: 18px;
+  color: #aaa;
+  transition: transform 0.2s;
+}
+
+.user-profile.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  overflow: hidden;
+  animation: fadeIn 0.15s ease;
+  z-index: 200;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+
+.dropdown-menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dropdown-menu li:hover {
+  background: #f7f7f7;
+}
+
+.dropdown-menu li mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #666;
+}
+
+.dropdown-menu .divider {
+  height: 1px;
+  background: #f0f0f0;
+  padding: 0;
+  margin: 4px 0;
+  cursor: default;
+}
+
+.dropdown-menu .divider:hover {
+  background: #f0f0f0;
+}
+
+.dropdown-menu .logout {
+  color: #e53935;
+}
+
+.dropdown-menu .logout mat-icon {
+  color: #e53935;
+}

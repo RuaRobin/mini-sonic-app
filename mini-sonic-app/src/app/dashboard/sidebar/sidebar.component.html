@@ -1,0 +1,21 @@
+<aside class="sidebar">
+
+    <div class= "logo-area">
+        <!-- <div class="logo-icon" >
+            <mat-icon> storefront</mat-icon>
+        </div>
+        <span class="logo-text"></span> -->
+    </div>
+
+    <nav class="nav-list">
+        <a 
+            *ngFor="let item of navItems"
+            class="nav-item"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            >
+        <mat-icon>{{item.icon}}</mat-icon>
+        <span>{{item.label}}</span>
+    </a>
+    </nav>
+</aside>
