@@ -1,0 +1,83 @@
+<div class="dialog-container">
+    <div class="dialog-header">
+        <div class="dialog-title-group">
+            <span class="dialog-label">Operation Details</span>
+            <h2 class="dialog-title">{{data.operationID}}</h2>
+        </div>
+        <button class="close-btn" (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="dialog-body">
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Type</span>
+      <span class="type-badge" [ngClass]="data.operationType.toLowerCase()">
+          {{ data.operationType }}
+        </span>
+      </div>
+
+     
+
+      <div class="info-item">
+        <span class="info-label">Customer</span>
+        <span class="info-value">{{ data.operationCustomer }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="info-label">Date</span>
+        <span class="info-value">{{ data.operationDate | date:'longDate' }}</span>
+      </div>
+
+
+      <div class="info-item">
+        <span class="info-label">Notes</span>
+        <span class="info-value notes">{{ data.notes || '—' }}</span>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="section-divider">
+      <span>Items</span>
+    </div>
+
+    <!-- Items table -->
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Line Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.items">
+          <td>{{ item.ItemName }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.unitPrice | currency }}</td>
+          <td>{{ lineTotal(item.quantity, item.unitPrice) | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <div class="total-row">
+        <span>Net Total</span>
+        <span>{{ data.netTotal | currency }}</span>
+      </div>
+      <div class="total-row gross">
+        <span>Gross Total</span>
+        <span>{{ data.grossTotal | currency }}</span>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-footer">
+    <button mat-stroked-button (click)="close()">Close</button>
+  </mat-dialog-actions>
+
+</div>

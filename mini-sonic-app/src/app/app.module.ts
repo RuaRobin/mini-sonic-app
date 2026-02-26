@@ -25,12 +25,15 @@ import {MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltip } from "@angular/material/tooltip";
+import { OperationViewComponent  } from "./dashboard/operation-view/operation-view.component";
+import { MatDialogContent, MatDialogActions } from "@angular/material/dialog";
 export function tokenGetter() {
   return localStorage.getItem('jwt');
 }
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent,CreateAccountComponent,DashboardComponent,HeaderComponent,SidebarComponent,OperationsTableComponent],
+    declarations: [AppComponent, LoginComponent,CreateAccountComponent,DashboardComponent,HeaderComponent,
+        SidebarComponent,OperationsTableComponent,OperationViewComponent ],
     imports: [AppRoutingModule, BrowserModule, BrowserAnimationsModule,
     MatButtonModule, MatCardModule, MatInputModule, NgIf, MatIconModule, ReactiveFormsModule,
     ToastrModule.forRoot({
@@ -47,7 +50,7 @@ export function tokenGetter() {
         }
     }), MatTable, MatSort, MatColumnDef, MatHeaderCell, MatHeaderRowDef, MatSortHeader, MatCell, MatCellDef, MatTableModule,
     MatPaginatorModule,
-    MatSortModule, MatTooltip],
+    MatSortModule, MatTooltip, MatDialogContent, MatDialogActions],
     bootstrap: [AppComponent],
     providers:[LoginService,NotificationsService]
 })

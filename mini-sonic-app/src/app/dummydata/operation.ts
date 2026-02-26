@@ -1,10 +1,21 @@
+
+export interface OperationItem{
+    ItemID : number,
+    ItemName: string,
+    unitPrice: number,
+    quantity: number
+}
+
+
 export interface Operation{
       operationID : number,
         operationType: string,
         operationCustomer:string ,
         operationDate : Date,
         netTotal : number,
-        grossTotal : number
+        grossTotal : number,
+        notes?: string,
+        items?: OperationItem[];
 }
 
 export const OPERATIONS :Operation[]=[

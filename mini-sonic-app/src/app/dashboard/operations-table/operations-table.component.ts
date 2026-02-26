@@ -3,6 +3,8 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { OperationViewComponent } from '../operation-view/operation-view.component'
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -28,6 +30,7 @@ export class OperationsTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  constructor(private dialog:MatDialog){}
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -44,12 +47,20 @@ export class OperationsTableComponent implements AfterViewInit {
   onEdit(row: Operation) {
     console.log('Edit: ', row);
   }
+  
   onDelete(row: Operation) {
     this.dataSource.data = this.dataSource.data.filter(o => o.operationID !== row.operationID)
   }
 
-  onViewOperation() {
-    console.log("viewing item")
+  onViewOperation(row:Operation) {
+    console.log("viewing item");
+    this.dialog.open(OperationViewComponent, {
+      data: row,
+      width: '620px',
+      maxHeight: '90vh',
+      panelClass: 'operation-dialog'
+    });
+  
   }
 
 
