@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
     this.dropdownOpen = !this.dropdownOpen;
   }
   onLogout(){
+    const jwt = this.authService.getActiveUser();
+    localStorage.removeItem(`operations_${jwt.userID}`);
     this.authService.logout();
     this.router.navigate(['/login']);
   }

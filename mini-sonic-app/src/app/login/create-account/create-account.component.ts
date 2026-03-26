@@ -43,7 +43,24 @@ export class CreateAccountComponent implements OnInit {
 
     const form = this.signupForm.value;
     if (!this.signupForm.valid) {
-      this.signupForm.markAllAsTouched();
+      if (this.signupForm.controls['newPassword'].hasError('minlength') ||
+        this.signupForm.controls['newPassword'].hasError('required')) {
+        this.notificationService.showErrorMsg("Password must be 8 characters at least..");
+      }
+      if (this.signupForm.controls['email'].hasError('invalidEmailFormat') ||
+        this.signupForm.controls['email'].hasError('required') ||
+        this.signupForm.controls['email'].hasError('email'))
+        {
+          this.notificationService.showErrorMsg("Invalid email address.");
+        }
+        if (this.signupForm.controls['confirmPassword'].hasError('required')){
+          this.notificationService.showErrorMsg("Please confirm your password.");
+        }
+        else if (this.signupForm.hasError('fieldsMismatch') && this.signupForm.controls['confirmPassword'].touched)
+        {
+          this.notificationService.showErrorMsg("Passwords do not match!");
+        }
+        this.signupForm.markAllAsTouched();
       return;
     }
     console.log('Registration form values:', form);

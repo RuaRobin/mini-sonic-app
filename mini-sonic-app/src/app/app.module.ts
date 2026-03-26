@@ -8,8 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import {MatIconModule} from '@angular/material/icon'
-import { NgIf } from "@angular/common";
+import { MatIconModule } from '@angular/material/icon';
+import { NgIf, NgFor, CurrencyPipe, DatePipe } from "@angular/common";
 import { CreateAccountComponent } from "./login/create-account/create-account.component";
 import { LoginService } from "./login/login.service";
 import { ToastrModule } from "ngx-toastr";
@@ -21,40 +21,79 @@ import { SidebarComponent } from "./dashboard/sidebar/sidebar.component";
 import { OperationsTableComponent } from "./dashboard/operations-table/operations-table.component";
 import { MatTable, MatColumnDef, MatHeaderCell, MatHeaderRowDef, MatCell, MatCellDef } from "@angular/material/table";
 import { MatSort, MatSortHeader } from "@angular/material/sort";
-import {MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltip } from "@angular/material/tooltip";
-import { OperationViewComponent  } from "./dashboard/operation-view/operation-view.component";
-import { MatDialogContent, MatDialogActions } from "@angular/material/dialog";
+import { OperationViewComponent } from "./dashboard/operation-view/operation-view.component";
+import { OperationEditComponent } from "./dashboard/operation-edit/operation-edit.component";
+import { MatDialogContent, MatDialogActions, MatDialogModule } from "@angular/material/dialog";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { ErrorPageComponent } from "./error-page/error-page.component";
+import { AddOperationComponent } from "./dashboard/add-operation/add-operation.component";
+import { AddItemComponent } from "./dashboard/add-item/add-item.component";
+
 export function tokenGetter() {
   return localStorage.getItem('jwt');
 }
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent,CreateAccountComponent,DashboardComponent,HeaderComponent,
-        SidebarComponent,OperationsTableComponent,OperationViewComponent ],
-    imports: [AppRoutingModule, BrowserModule, BrowserAnimationsModule,
-    MatButtonModule, MatCardModule, MatInputModule, NgIf, MatIconModule, ReactiveFormsModule,
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    CreateAccountComponent,
+    DashboardComponent,
+    HeaderComponent,
+    SidebarComponent,
+    OperationsTableComponent,
+    OperationViewComponent,
+    OperationEditComponent,
+    ErrorPageComponent,
+    AddOperationComponent,
+    AddItemComponent
+  ],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    NgIf,
+    NgFor,
+    MatIconModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
-        timeOut: 3000,
-        positionClass: 'toast-top-right',
-        preventDuplicates: true,
-        closeButton: true
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
     }),
     JwtModule.forRoot({
-        config: {
-            tokenGetter: tokenGetter,
-            allowedDomains: [],
-            disallowedRoutes: []
-        }
-    }), MatTable, MatSort, MatColumnDef, MatHeaderCell, MatHeaderRowDef, MatSortHeader, MatCell, MatCellDef, MatTableModule,
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [],
+        disallowedRoutes: [],
+      },
+    }),
+    MatTable, MatSort, MatColumnDef, MatHeaderCell, MatHeaderRowDef,
+    MatSortHeader, MatCell, MatCellDef,
+    MatTableModule,
     MatPaginatorModule,
-    MatSortModule, MatTooltip, MatDialogContent, MatDialogActions],
-    bootstrap: [AppComponent],
-    providers:[LoginService,NotificationsService]
+    MatSortModule,
+    MatTooltip,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogModule,          
+    MatSelectModule,          
+    MatDatepickerModule,      
+    MatNativeDateModule,      
+    CurrencyPipe,
+    DatePipe,
+  ],
+  bootstrap: [AppComponent],
+  providers: [LoginService, NotificationsService],
 })
-
-
-
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,145 @@
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <button class="back-btn" (click)="cancel()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div>
+        <span class="page-label">Operations</span>
+        <h1 class="page-title">New Operation</h1>
+      </div>
+    </div>
+  
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card">
+    <form [formGroup]="form">
+
+      <!-- Section: General Info -->
+      <div class="section-title">General Information</div>
+      <div class="fields-grid">
+
+        <div class="field-item">
+          <label class="field-label">Operation Type</label>
+          <select class="field-select" formControlName="operationType">
+            <option *ngFor="let t of operationTypes" [value]="t">{{ t }}</option>
+          </select>
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Customer</label>
+          <input
+            class="field-input"
+            formControlName="operationCustomer"
+            placeholder="Enter customer name"
+          />
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Date</label>
+          <input class="field-input" type="date" formControlName="operationDate" />
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Notes</label>
+          <input
+            class="field-input notes-input"
+            formControlName="notes"
+            placeholder="Optional notes"
+          />
+        </div>
+
+      </div>
+
+      <!-- Section: Items -->
+      <div class="section-divider">
+        <span>Items</span>
+      </div>
+
+      <div formArrayName="items">
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Line Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of items.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <td>
+                <input
+                  class="cell-input"
+                  formControlName="ItemName"
+                  placeholder="Product name"
+                />
+              </td>
+              <td>
+                <input
+                  class="cell-input qty-input"
+                  type="number"
+                  formControlName="quantity"
+                  min="1"
+                />
+              </td>
+              <td>
+                <input
+                  class="cell-input price-input"
+                  type="number"
+                  formControlName="unitPrice"
+                  min="0"
+                  step="0.01"
+                />
+              </td>
+              <td>
+                <span class="line-total">{{ lineTotal(i) | currency }}</span>
+              </td>
+              <td>
+                <button
+                  class="remove-btn"
+                  type="button"
+                  (click)="removeItem(i)"
+                  [disabled]="items.length === 1"
+                >
+                  <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button class="add-item-btn" type="button" (click)="addItem()">
+        <mat-icon>add</mat-icon>
+        Add Item
+      </button>
+
+      <!-- Totals -->
+      <div class="totals">
+        <div class="total-row">
+          <span>Net Total</span>
+          <span>{{ netTotal | currency }}</span>
+        </div>
+        <div class="total-row gross">
+          <span>Gross Total</span>
+          <span>{{ grossTotal | currency }}</span>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="page-header-actions">
+      <button class="btn-cancel" (click)="cancel()">Cancel</button>
+      <button class="btn-save" (click)="save()" [disabled]="form.invalid">
+        Save Operation
+      </button>
+    </div>
+</div>

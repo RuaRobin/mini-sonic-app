@@ -1,11 +1,5 @@
 
-export interface OperationItem{
-    ItemID : number,
-    ItemName: string,
-    unitPrice: number,
-    quantity: number
-}
-
+import { Item } from "./items";
 
 export interface Operation{
       operationID : number,
@@ -15,13 +9,13 @@ export interface Operation{
         netTotal : number,
         grossTotal : number,
         notes?: string,
-        items?: OperationItem[];
+        items?: Item[];
 }
 
 export const OPERATIONS :Operation[]=[
     {
         operationID : 1,
-        operationType: 'sale',
+        operationType: 'Sale',
         operationCustomer:'',
         operationDate :new Date(),
         netTotal : 110,
@@ -29,7 +23,7 @@ export const OPERATIONS :Operation[]=[
     },
     {
         operationID : 2,
-        operationType: 'sale',
+        operationType: 'Sale',
         operationCustomer:'',
         operationDate :new Date(),
         netTotal : 200,

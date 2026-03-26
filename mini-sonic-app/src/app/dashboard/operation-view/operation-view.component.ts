@@ -1,27 +1,30 @@
-import { Component,Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Operation } from '../../dummydata/operation';
 
 @Component({
   selector: 'app-operation-view',
-standalone: false,
+  standalone: false,
   templateUrl: './operation-view.component.html',
   styleUrl: './operation-view.component.css',
 })
-export class OperationViewComponent{
+export class OperationViewComponent {
 
-  constructor(public dialogRef : MatDialogRef<OperationViewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data : Operation
-  ){}
+  constructor(
+    public dialogRef: MatDialogRef<OperationViewComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Operation
+  ) {}
 
-  close(){
-    this.dialogRef.close();
+  close(): void {
+    this.dialogRef.close(null);
   }
 
-  lineTotal(quantity: number, unitPrice: number){
+  // Close the view dialog and tell the table to open the edit dialog
+  edit(): void {
+    this.dialogRef.close({ edit: true, data: this.data });
+  }
 
+  lineTotal(quantity: number, unitPrice: number): number {
     return quantity * unitPrice;
   }
-
-
 }

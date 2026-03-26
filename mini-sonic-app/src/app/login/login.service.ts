@@ -27,7 +27,7 @@ export class LoginService {
   }
   checkIfExists(user: User): boolean {
     return !!this.users.find(
-      u => u.email === user.email || u.name === user.name
+      u => u.email === user.email || u.name.toLowerCase() === user.name.toLowerCase()
     );
   }
 

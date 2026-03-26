@@ -20,8 +20,43 @@
   letter-spacing: 0.01em;
 }
 
+/* Groups the search field and add button together on the right */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .filter-field {
   width: 260px;
+}
+
+/* Add Operation button */
+.add-btn {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #6366f1;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: #4f46e5;
+}
+
+.add-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 .table-wrapper {
@@ -72,29 +107,15 @@ table {
 
 .action-btn mat-icon {
   font-size: 18px;
-  width: 100px;
+  width: 18px;
   height: 18px;
 }
 
-.action-btn.edit {
-  color: #6366f1;
-}
-
-.action-btn.edit:hover {
-  background: #e0e7ff;
-}
-
-.action-btn.delete {
-  color: #ef4444;
-}
-
-.action-btn.delete:hover {
-  background: #fee2e2;
-}
-
-.action-btn:active {
-  transform: scale(0.92);
-}
+.action-btn.edit  { color: #6366f1; }
+.action-btn.edit:hover  { background: #e0e7ff; }
+.action-btn.delete { color: #ef4444; }
+.action-btn.delete:hover { background: #fee2e2; }
+.action-btn:active { transform: scale(0.92); }
 
 /* No data */
 .no-data-row td {

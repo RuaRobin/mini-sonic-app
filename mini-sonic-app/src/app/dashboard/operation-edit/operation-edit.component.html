@@ -1,0 +1,121 @@
+<div class="edit-container">
+
+  <!-- Header -->
+  <div class="edit-header">
+    <div class="edit-title-group">
+      <span class="edit-label">Edit Operation</span>
+      <h2 class="edit-title">{{ data.operationID }}</h2>
+    </div>
+    <button class="close-btn" (click)="cancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="edit-body">
+    <form [formGroup]="form">
+
+      <!-- Top fields — same 2-col grid as the view dialog's info-grid -->
+      <div class="fields-grid">
+
+        <div class="field-item">
+          <label class="field-label">Type*</label>
+          <select class="field-select" formControlName="operationType">
+            <option *ngFor="let t of operationTypes" [value]="t">{{ t }}</option>
+          </select>
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Customer*</label>
+          <input class="field-input" formControlName="operationCustomer" placeholder="Customer name" />
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Date*</label>
+          <input class="field-input" type="date" formControlName="operationDate" />
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Notes (optional)</label>
+          <input class="field-input notes-input" formControlName="notes" placeholder="—" />
+        </div>
+
+      </div>
+
+      <!-- Items section -->
+      <div class="section-divider">
+        <span>Items</span>
+      </div>
+
+      <div formArrayName="items">
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Line Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of items.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <td>
+                <input class="cell-input" formControlName="ItemName" placeholder="Product name" />
+              </td>
+              <td>
+                <input class="cell-input qty-input" type="number" formControlName="quantity" min="1" />
+              </td>
+              <td>
+                <input class="cell-input price-input" type="number" formControlName="unitPrice" min="0" step="0.01" />
+              </td>
+              <td>
+                <span class="line-total">{{ lineTotal(i) | currency }}</span>
+              </td>
+              <td>
+                <button
+                  class="remove-btn"
+                  type="button"
+                  (click)="removeItem(i)"
+                  matTooltip="Remove item"
+                >
+                  <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Add item -->
+      <button class="add-item-btn" type="button" (click)="addItem()">
+        <mat-icon>add</mat-icon>
+        Add Item
+      </button>
+
+      <!-- Totals — same markup as view dialog -->
+      <div class="totals">
+        <div class="total-row">
+          <span>Net Total</span>
+          <span>{{ netTotal | currency }}</span>
+        </div>
+        <div class="total-row gross">
+          <span>Gross Total</span>
+          <span>{{ grossTotal | currency }}</span>
+        </div>
+      </div>
+
+    </form>
+  </mat-dialog-content>
+
+  <!-- Footer -->
+  <mat-dialog-actions class="edit-footer">
+    <button mat-stroked-button (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid">
+      Save Changes
+    </button>
+  </mat-dialog-actions>
+
+</div>

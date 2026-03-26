@@ -1,0 +1,348 @@
+/* ── Page layout ── */
+.page-container {
+  padding: 32px;
+  max-width: 780px;
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ── Page header ── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.back-btn {
+  all: unset;
+  cursor: pointer;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.back-btn:hover {
+  background: #f3f4f6;
+  color: #1c1e21;
+}
+
+.page-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1c1e21;
+  margin: 0;
+}
+
+/* ── Header action buttons ── */
+.page-header-actions {
+  display: flex;
+  justify-content: flex-end; /* push buttons to the right */
+  margin-top: 20px;
+  gap : 10px;
+}
+
+.btn-cancel {
+  all: unset;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-cancel:hover {
+  background: #f3f4f6;
+  color: #1c1e21;
+}
+
+.btn-save {
+  all: unset;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #6366f1;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.btn-save:hover:not([disabled]) {
+  background: #4f46e5;
+}
+
+.btn-save[disabled] {
+  background: #c7d2fe;
+  cursor: not-allowed;
+}
+
+/* ── Form card ── */
+.form-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 28px;
+}
+
+/* ── Section title ── */
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+/* ── Fields grid — mirrors info-grid from view/edit ── */
+.fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+  margin-bottom: 28px;
+}
+
+.field-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.field-input,
+.field-select {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1c1e21;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 7px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field-input:focus,
+.field-select:focus {
+  border-color: #6366f1;
+  background: #fff;
+}
+
+.field-input.notes-input {
+  color: #4b5563;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ── Section divider ── identical to dialogs ── */
+.section-divider {
+  position: relative;
+  text-align: center;
+  margin: 8px 0 16px;
+}
+
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.section-divider span {
+  position: relative;
+  background: #fff;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Items table ── mirrors dialogs ── */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+}
+
+.items-table thead tr {
+  background: #fafafa;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.items-table th {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.items-table td {
+  font-size: 13px;
+  color: #1c1e21;
+  padding: 8px 12px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+}
+
+.items-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cell-input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1c1e21;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 5px 8px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.cell-input:focus {
+  border-color: #6366f1;
+  background: #fff;
+}
+
+.cell-input.qty-input   { width: 60px; }
+.cell-input.price-input { width: 90px; }
+
+.line-total {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1e21;
+  white-space: nowrap;
+}
+
+.remove-btn {
+  all: unset;
+  cursor: pointer;
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.remove-btn:hover:not([disabled]) { background: #fee2e2; }
+.remove-btn[disabled] { color: #d1d5db; cursor: not-allowed; }
+
+.remove-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Add item button ── */
+.add-item-btn {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6366f1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  margin-bottom: 20px;
+}
+
+.add-item-btn:hover { background: #e0e7ff; }
+
+.add-item-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Totals ── identical to dialogs ── */
+.totals {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.total-row {
+  display: flex;
+  gap: 48px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.total-row span:last-child {
+  font-weight: 600;
+  color: #1c1e21;
+  min-width: 90px;
+  text-align: right;
+}
+
+.total-row.gross {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1c1e21;
+}
+
+.total-row.gross span:last-child { color: #6366f1; }
