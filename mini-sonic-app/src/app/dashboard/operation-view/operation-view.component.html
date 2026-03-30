@@ -55,7 +55,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of data.items">
-          <td>{{ item.ItemName }}</td>
+          <td>{{ item.itemName }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.unitPrice | currency }}</td>
           <td>{{ lineTotal(item.quantity, item.unitPrice) | currency }}</td>

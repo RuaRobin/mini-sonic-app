@@ -1,70 +1,75 @@
 import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Operation } from '../../dummydata/operation';
+import { Item, ITEMS } from '../../dummydata/items';
+import { AuthService } from '../../login/auth.service';
 
 @Component({
   selector: 'app-operation-edit',
   standalone: false,
   templateUrl: './operation-edit.component.html',
   styleUrl: './operation-edit.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush   // fixes ExpressionChangedAfterChecked
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OperationEditComponent {
   form: FormGroup;
   operationTypes = ['Sale', 'Purchase', 'Return', 'Refund'];
+  itemsInStock: Item[] = [];
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<OperationEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Operation
+    @Inject(MAT_DIALOG_DATA) public data: Operation,
+    private authService: AuthService
   ) {
-   
+    const jwt = this.authService.getActiveUser();
+    const saved = localStorage.getItem(`items_${jwt.userID}`);
+    this.itemsInStock = saved ? JSON.parse(saved) : [...ITEMS];
+
+    // Build a lookup of existing quantities from the operation being edited
+    const existingQtyMap: Record<string, number> = {};
+    (this.data.items ?? []).forEach((item: any) => {
+      existingQtyMap[item.itemName] = item.quantity;
+    });
+
+    // Build one quantity control per stock item
+    const qtyControls: Record<string, any> = {};
+    this.itemsInStock.forEach(item => {
+      qtyControls[item.itemName] = [
+        existingQtyMap[item.itemName] ?? 0,
+        [Validators.required, Validators.min(0)]
+      ];
+    });
+
     this.form = this.fb.group({
       operationType: [this.data.operationType, Validators.required],
       operationCustomer: [this.data.operationCustomer, Validators.required],
       operationDate: [this.toDateString(this.data.operationDate), Validators.required],
       notes: [this.data.notes ?? ''],
-      items: this.fb.array(
-        (this.data.items ?? []).map(item =>
-          this.fb.group({
-            ItemName: [item.ItemName, Validators.required],
-            quantity: [item.quantity, [Validators.required, Validators.min(1)]],
-            unitPrice: [item.unitPrice, [Validators.required, Validators.min(0)]],
-          })
-        )
-      ),
+      quantities: this.fb.group(qtyControls),
     });
   }
 
-  get items(): FormArray {
-    return this.form.get('items') as FormArray;
+  private toDateString(date: any): string {
+    if (!date) return '';
+    return new Date(date).toISOString().split('T')[0];
   }
 
-  addItem(): void {
-    this.items.push(
-      this.fb.group({
-        ItemName: ['', Validators.required],
-        quantity: [1, [Validators.required, Validators.min(1)]],
-        unitPrice: [0, [Validators.required, Validators.min(0)]],
-      })
-    );
-  }
-private toDateString(date: any): string {
-  if (!date) return '';
-  return new Date(date).toISOString().split('T')[0];
-}
-  removeItem(index: number): void {
-      this.items.removeAt(index);
+  get quantitiesGroup(): FormGroup {
+    return this.form.get('quantities') as FormGroup;
   }
 
-  lineTotal(index: number): number {
-    const item = this.items.at(index).value;
-    return (item.quantity ?? 0) * (item.unitPrice ?? 0);
+  getQty(itemName: string): number {
+    return this.quantitiesGroup.get(itemName)?.value ?? 0;
+  }
+
+  lineTotal(item: Item): number {
+    return this.getQty(item.itemName) * (item.unitPrice ?? 0);
   }
 
   get netTotal(): number {
-    return this.items.controls.reduce((sum, _, i) => sum + this.lineTotal(i), 0);
+    return this.itemsInStock.reduce((sum, item) => sum + this.lineTotal(item), 0);
   }
 
   get grossTotal(): number {
@@ -74,13 +79,23 @@ private toDateString(date: any): string {
   save(): void {
     if (this.form.invalid) return;
 
+    // Convert the flat quantity map back into an items array (only include qty > 0)
+    const items = this.itemsInStock
+      .filter(item => this.getQty(item.itemName) > 0)
+      .map(item => ({
+        itemName: item.itemName,
+        quantity: this.getQty(item.itemName),
+        unitPrice: item.unitPrice,
+      }));
+
+    const { quantities, ...rest } = this.form.value;
     const updated: Operation = {
       ...this.data,
-      ...this.form.value,
+      ...rest,
+      items,
       netTotal: this.netTotal,
       grossTotal: this.grossTotal,
     };
-
     this.dialogRef.close(updated);
   }
 

@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth-guard.service';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AddOperationComponent } from './dashboard/add-operation/add-operation.component';
+import { AddItemComponent } from './dashboard/add-item/add-item.component';
 const appRoutes: Routes = [
     {
         path: 'login', component: LoginComponent
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
 
     },
     { path: 'dashboard/add-operation', component: AddOperationComponent, canActivate: [AuthGuard] }
+    , { path: 'dashboard/add-item', component: AddItemComponent, canActivate: [AuthGuard] }
     , {
         path: '', redirectTo: '/login', pathMatch: 'full'
     },

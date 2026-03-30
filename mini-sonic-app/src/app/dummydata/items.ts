@@ -1,22 +1,25 @@
 
 export interface Item{
-    ItemID : number,
-    ItemName: string,
+    itemID : string,
+    itemName: string,
+    category:string,
     unitPrice: number,
     quantity: number,
     tax: number
 }
 
 export const ITEMS :Item[]=[{
-    ItemID: 1, 
-    ItemName: "Tuna Can",
+    itemID: "1", 
+    itemName: "Tuna Can",
+    category:"Canned Goods",
     unitPrice: 1.75,
     quantity: 5,
     tax : 0.16
 },
 {
-    ItemID: 1, 
-    ItemName: "Hummus",
+    itemID: "2", 
+    itemName: "Hummus",
+    category:"Canned Goods",
     unitPrice: 1.75,
     quantity: 5,
     tax : 0.01

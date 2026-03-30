@@ -2,7 +2,7 @@
 import { Item } from "./items";
 
 export interface Operation{
-      operationID : number,
+      operationID : string,
         operationType: string,
         operationCustomer:string ,
         operationDate : Date,
@@ -14,19 +14,19 @@ export interface Operation{
 
 export const OPERATIONS :Operation[]=[
     {
-        operationID : 1,
+        operationID : "1",
         operationType: 'Sale',
-        operationCustomer:'',
+        operationCustomer:'Ahmad',
         operationDate :new Date(),
-        netTotal : 110,
-        grossTotal : 200
+        netTotal : 0,
+        grossTotal : 0
     },
     {
-        operationID : 2,
+        operationID : "2",
         operationType: 'Sale',
-        operationCustomer:'',
+        operationCustomer:'Mohammad',
         operationDate :new Date(),
-        netTotal : 200,
-        grossTotal : 200
+        netTotal : 0,
+        grossTotal : 0
     }
 ]

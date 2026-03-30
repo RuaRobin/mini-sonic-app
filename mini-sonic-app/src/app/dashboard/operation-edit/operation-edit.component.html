@@ -14,7 +14,7 @@
   <mat-dialog-content class="edit-body">
     <form [formGroup]="form">
 
-      <!-- Top fields — same 2-col grid as the view dialog's info-grid -->
+      <!-- General fields -->
       <div class="fields-grid">
 
         <div class="field-item">
@@ -35,67 +35,48 @@
         </div>
 
         <div class="field-item">
-          <label class="field-label">Notes (optional)</label>
+          <label class="field-label">Notes (Optional)</label>
           <input class="field-input notes-input" formControlName="notes" placeholder="—" />
         </div>
 
       </div>
 
-      <!-- Items section -->
+      <!-- Items table -->
       <div class="section-divider">
         <span>Items</span>
       </div>
 
-      <div formArrayName="items">
+      <div formGroupName="quantities">
         <table class="items-table">
           <thead>
             <tr>
               <th>Product</th>
-              <th>Qty</th>
               <th>Unit Price</th>
+              <th>Qty</th>
               <th>Line Total</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="let item of items.controls; let i = index"
-              [formGroupName]="i"
-            >
+            <tr *ngFor="let item of itemsInStock">
+              <td>{{ item.itemName }}</td>
+              <td>{{ item.unitPrice | currency }}</td>
               <td>
-                <input class="cell-input" formControlName="ItemName" placeholder="Product name" />
+                <input
+                  class="cell-input qty-input"
+                  type="number"
+                  [formControlName]="item.itemName"
+                  min="0"
+                />
               </td>
               <td>
-                <input class="cell-input qty-input" type="number" formControlName="quantity" min="1" />
-              </td>
-              <td>
-                <input class="cell-input price-input" type="number" formControlName="unitPrice" min="0" step="0.01" />
-              </td>
-              <td>
-                <span class="line-total">{{ lineTotal(i) | currency }}</span>
-              </td>
-              <td>
-                <button
-                  class="remove-btn"
-                  type="button"
-                  (click)="removeItem(i)"
-                  matTooltip="Remove item"
-                >
-                  <mat-icon>remove_circle_outline</mat-icon>
-                </button>
+                <span class="line-total">{{ lineTotal(item) | currency }}</span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Add item -->
-      <button class="add-item-btn" type="button" (click)="addItem()">
-        <mat-icon>add</mat-icon>
-        Add Item
-      </button>
-
-      <!-- Totals — same markup as view dialog -->
+      <!-- Totals -->
       <div class="totals">
         <div class="total-row">
           <span>Net Total</span>

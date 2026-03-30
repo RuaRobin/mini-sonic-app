@@ -1,0 +1,122 @@
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <button class="back-btn" (click)="cancel()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div>
+        <span class="page-label">Stock</span>
+        <h1 class="page-title">Manage Items</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Item Form Card -->
+  <div class="form-card">
+    <div class="section-title">Add New Item</div>
+    <form [formGroup]="form">
+
+      <div class="fields-grid">
+
+        <div class="field-item">
+          <label class="field-label">Item Name*</label>
+          <input class="field-input" formControlName="itemName" placeholder="Enter item name" />
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Category*</label>
+          <select class="field-select" formControlName="category">
+            <option value="" disabled>Select category</option>
+            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Unit Price*</label>
+          <input class="field-input" formControlName="unitPrice" type="number" min="0" step="0.01" />
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Quantity*</label>
+          <input class="field-input" formControlName="quantity" type="number" min="1" step="1" />
+        </div>
+
+        <div class="field-item">
+          <label class="field-label">Tax (%)*</label>
+          <input class="field-input" formControlName="tax" type="number" min="0" step="0.1" />
+        </div>
+
+        <div class="field-item total-preview">
+          <label class="field-label">Line Total</label>
+          <span class="line-total-value">{{ lineTotal | currency }}</span>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-cancel" type="button" (click)="cancel()">Cancel</button>
+        <button class="btn-save" type="button" (click)="save()" [disabled]="form.invalid">
+          <mat-icon>add</mat-icon>
+          Add Item
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Items Table Card -->
+  <div class="table-card">
+
+    <div class="table-header">
+      <h2 class="table-title">Stock Items</h2>
+      <div class="search-wrapper">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input
+          class="search-input"
+          (keyup)="applySearch($event)"
+          placeholder="Search by name or category..."
+        />
+      </div>
+    </div>
+
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Tax %</th>
+          <th>Line Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredItems">
+          <td>{{ item.itemName }}</td>
+          <td>
+            <span class="category-badge">{{ item.category }}</span>
+          </td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.unitPrice | currency }}</td>
+          <td>{{ item.tax }}%</td>
+          <td>{{ (item.quantity * item.unitPrice) | currency }}</td>
+          <td>
+            <button class="remove-btn" type="button" (click)="removeItem(item.itemID)" matTooltip="Remove">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredItems.length === 0">
+          <td colspan="7" class="no-data">
+            {{ searchQuery ? 'No items match your search.' : 'No items yet. Add one above.' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

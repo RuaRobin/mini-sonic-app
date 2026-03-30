@@ -197,6 +197,7 @@
 
 .cell-input.qty-input   { width: 60px; }
 .cell-input.price-input { width: 90px; }
+.cell-input.cell-select { width: 100%; appearance: none; -webkit-appearance: none; }
 
 /* Line total — read-only, styled like .info-value */
 .line-total {
