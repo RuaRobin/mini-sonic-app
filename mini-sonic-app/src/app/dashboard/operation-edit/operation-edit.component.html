@@ -53,20 +53,19 @@
               <th>Product</th>
               <th>Unit Price</th>
               <th>Qty</th>
+              <th>Tax (%)</th>
               <th>Line Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of itemsInStock">
+            <tr *ngFor="let item of paginatedItems">
               <td>{{ item.itemName }}</td>
               <td>{{ item.unitPrice | currency }}</td>
               <td>
-                <input
-                  class="cell-input qty-input"
-                  type="number"
-                  [formControlName]="item.itemName"
-                  min="0"
-                />
+                <input class="cell-input qty-input" type="number" [formControlName]="item.itemName" min="0" />
+              </td>
+              <td>
+                {{item.tax}}%
               </td>
               <td>
                 <span class="line-total">{{ lineTotal(item) | currency }}</span>
@@ -74,10 +73,12 @@
             </tr>
           </tbody>
         </table>
+        <mat-paginator [length]="itemsInStock.length" [pageSize]="pageSize" (page)="onPageChange($event)"
+          showFirstLastButtons></mat-paginator>
       </div>
 
       <!-- Totals -->
-      <div class="totals">
+         <div class="totals">
         <div class="total-row">
           <span>Net Total</span>
           <span>{{ netTotal | currency }}</span>

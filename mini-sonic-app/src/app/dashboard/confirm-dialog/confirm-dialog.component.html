@@ -1,0 +1,15 @@
+<div class="confirm-container">
+  <div class="confirm-header">
+    <span class="confirm-label">Confirm Action</span>
+    <h2 class="confirm-title">{{ data.title }}</h2>
+  </div>
+
+  <div class="confirm-body">
+    <p class="confirm-message">{{ data.message }}</p>
+  </div>
+
+  <div class="confirm-footer">
+    <button class="btn-cancel" [mat-dialog-close]="false">Cancel</button>
+    <button class="btn-confirm" [mat-dialog-close]="true">Yes, Delete</button>
+  </div>
+</div>

@@ -30,11 +30,7 @@
 
         <div class="field-item">
           <label class="field-label">Customer*</label>
-          <input
-            class="field-input"
-            formControlName="operationCustomer"
-            placeholder="Enter customer name"
-          />
+          <input class="field-input" formControlName="operationCustomer" placeholder="Enter customer name" />
         </div>
 
         <div class="field-item">
@@ -44,11 +40,7 @@
 
         <div class="field-item">
           <label class="field-label">Notes (Optional)</label>
-          <input
-            class="field-input notes-input"
-            formControlName="notes"
-            placeholder="Optional notes"
-          />
+          <input class="field-input notes-input" formControlName="notes" placeholder="Optional notes" />
         </div>
 
       </div>
@@ -57,7 +49,10 @@
       <div class="section-divider">
         <span>Items</span>
       </div>
-
+      <div class="search-wrapper">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input class="search-input" (keyup)="applySearch($event)" placeholder="Search by name or category..." />
+      </div>
       <div formGroupName="quantities">
         <table class="items-table">
           <thead>
@@ -65,27 +60,33 @@
               <th>Product</th>
               <th>Unit Price</th>
               <th>Qty</th>
+              <th>Tax %</th>
               <th>Line Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of itemsInStock">
+            <tr *ngFor="let item of paginatedItems" [class.row-active]="getQty(item.itemName) > 0">
               <td>{{ item.itemName }}</td>
               <td>{{ item.unitPrice | currency }}</td>
               <td>
-                <input
-                  class="cell-input qty-input"
-                  type="number"
-                  [formControlName]="item.itemName"
-                  min="0"
-                />
+                <input class="cell-input qty-input" type="number" [formControlName]="item.itemName" min="0" />
               </td>
+              <td>{{item.tax}}%</td>
               <td>
-                <span class="line-total">{{ lineTotal(item) | currency }}</span>
+                <span class="line-total" [class.line-total-active]="getQty(item.itemName) > 0">
+                  {{ lineTotal(item) | currency }}
+                </span>
+              </td>
+            </tr>
+            <tr *ngIf="filteredItems.length === 0">
+              <td colspan="4" class="no-data">
+                {{ searchQuery ? 'No items match your search.' : 'No items in stock.' }}
               </td>
             </tr>
           </tbody>
         </table>
+        <mat-paginator [length]="filteredItems.length" [pageSize]="pageSize" (page)="onPageChange($event)"
+          showFirstLastButtons></mat-paginator>
       </div>
 
       <!-- Totals -->
@@ -105,7 +106,7 @@
 
   <div class="page-header-actions">
     <button class="btn-cancel" (click)="cancel()">Cancel</button>
-    <button class="btn-save" (click)="save()" [disabled]="form.invalid">
+    <button class="btn-save" (click)="save()">
       Save Operation
     </button>
   </div>

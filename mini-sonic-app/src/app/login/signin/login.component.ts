@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     if (user) {
       if (this.authService.login(form.email, form.password)) {
         this.statusMessage = "Login Successful";
-        setTimeout(() => { this.router.navigate(['dashboard']) }, 1000);
+        setTimeout(() => { this.router.navigate(['dashboard']) }, 800);
       } else {
         this.notificationService.showErrorMsg("Password is incorrect.");
         this.statusMessage = "Password is incorrect.";

@@ -57,7 +57,7 @@
 
       <div class="form-actions">
         <button class="btn-cancel" type="button" (click)="cancel()">Cancel</button>
-        <button class="btn-save" type="button" (click)="save()" [disabled]="form.invalid">
+        <button class="btn-save" type="button" (click)="save()" >
           <mat-icon>add</mat-icon>
           Add Item
         </button>
@@ -84,6 +84,7 @@
     <table class="items-table">
       <thead>
         <tr>
+          <th>Item ID</th>
           <th>Item Name</th>
           <th>Category</th>
           <th>Qty</th>
@@ -94,7 +95,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of filteredItems">
+        <tr *ngFor="let item of paginatedItems">
+          <td>{{item.itemID}}</td>
           <td>{{ item.itemName }}</td>
           <td>
             <span class="category-badge">{{ item.category }}</span>
@@ -116,7 +118,12 @@
         </tr>
       </tbody>
     </table>
-
+<mat-paginator
+[length]="filteredItems.length"
+[pageSize]="pageSize"
+(page)="onPageChange($event)"
+showFirstLastButtons
+></mat-paginator>
   </div>
 
 </div>

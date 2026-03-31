@@ -1,13 +1,14 @@
 import { type Operation, OPERATIONS } from '../../dummydata/operation';
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { OperationViewComponent } from '../operation-view/operation-view.component';
 import { OperationEditComponent } from '../operation-edit/operation-edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../login/auth.service';
 import { Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-operations-table',
@@ -33,18 +34,18 @@ export class OperationsTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog,private authService: AuthService, private router : Router) { 
+  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) {
     const jwt = this.authService.getActiveUser();
-    this.storageKey= `operations_${jwt.userID}`;
+    this.storageKey = `operations_${jwt.userID}`;
   }
   dataSource = new MatTableDataSource<Operation>();
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     const saved = localStorage.getItem(this.storageKey);
-    this.dataSource.data = saved ? JSON.parse(saved): OPERATIONS;
+    this.dataSource.data = saved ? JSON.parse(saved) : OPERATIONS;
 
   }
-    private saveToStorage(): void {
+  private saveToStorage(): void {
     localStorage.setItem(this.storageKey, JSON.stringify(this.dataSource.data));
   }
   ngAfterViewInit(): void {
@@ -79,10 +80,14 @@ export class OperationsTableComponent implements AfterViewInit {
       }
     });
   }
+  onPageChange(event: PageEvent): void {
+    this.paginator.pageIndex = event.pageIndex;
+    this.paginator.pageSize = event.pageSize;
+  }
   goToAdd(): void {
     this.router.navigate(['/dashboard/add-operation']);
   }
-  goToAddItems(): void{
+  goToAddItems(): void {
     this.router.navigate(['/dashboard/add-item']);
 
   }
@@ -93,10 +98,23 @@ export class OperationsTableComponent implements AfterViewInit {
 
   onDelete(event: Event, row: Operation): void {
     event.stopPropagation();
-    this.dataSource.data = this.dataSource.data.filter(
-      o => o.operationID !== row.operationID
-    );
-    this.saveToStorage();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+      data: {
+        title: "Delete Opertation",
+        message: "Are you sure you want to delete this operation?"
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+        this.dataSource.data = this.dataSource.data.filter(
+          o => o.operationID !== row.operationID
+        );
+        this.saveToStorage();
+      }
+    })
+
   }
 
   onViewOperation(row: Operation): void {

@@ -1,0 +1,74 @@
+.confirm-container {
+  font-family: 'Montserrat', sans-serif;
+  width: 360px;
+  padding: 24px;
+}
+
+.confirm-header {
+  margin-bottom: 12px;
+}
+
+.confirm-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.confirm-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1c1e21;
+  margin: 0;
+}
+
+.confirm-body {
+  margin-bottom: 24px;
+}
+
+.confirm-message {
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.confirm-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-cancel {
+  all: unset;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  transition: background 0.15s;
+}
+
+.btn-cancel:hover { background: #f3f4f6; }
+
+.btn-confirm {
+  all: unset;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #ef4444;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.btn-confirm:hover { background: #dc2626; }

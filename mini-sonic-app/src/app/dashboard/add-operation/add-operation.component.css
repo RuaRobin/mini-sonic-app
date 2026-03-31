@@ -176,6 +176,42 @@
   font-style: italic;
 }
 
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 100%;
+  transition: border-color 0.15s;
+  margin-bottom: 10px;
+}
+
+.search-wrapper:focus-within {
+  border-color: #6366f1;
+  background: #fff;
+}
+
+.search-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #9ca3af;
+}
+
+.search-input {
+  all: unset;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #1c1e21;
+  width: 100%;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
 /* ── Section divider ── identical to dialogs ── */
 .section-divider {
   position: relative;

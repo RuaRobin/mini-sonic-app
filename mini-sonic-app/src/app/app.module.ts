@@ -34,6 +34,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { AddOperationComponent } from "./dashboard/add-operation/add-operation.component";
 import { AddItemComponent } from "./dashboard/add-item/add-item.component";
+import { ConfirmDialogComponent } from "./dashboard/confirm-dialog/confirm-dialog.component";
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -52,7 +53,8 @@ export function tokenGetter() {
     OperationEditComponent,
     ErrorPageComponent,
     AddOperationComponent,
-    AddItemComponent
+    AddItemComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -61,8 +63,7 @@ export function tokenGetter() {
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    NgIf,
-    NgFor,
+  
     MatIconModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
